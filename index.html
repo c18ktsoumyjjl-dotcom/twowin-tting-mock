@@ -278,12 +278,7 @@ function renderSide(){
 
 function R(){
   renderSide();
-  const ens=S.menuEn||SITE.menuEn||[];
-  $('cats').innerHTML=(S.menus||[]).map((c,i)=>{
-    const en=ens[i]||'';
-    const ic=(S.menuIcons&&S.menuIcons[i])||n2(i);
   $('cats').innerHTML=(S.menus||[]).map((c,i)=>`<div class="main-card ed">${C(i)}<div class="ic"><img src="icons/cat-${(S.menuIcons&&S.menuIcons[i])||n2(i)}.png" onerror="this.replaceWith(document.createTextNode('${c[0]}'))"></div>${c}</div>`).join('');
-  }).join('');
   bind($('cats'),S.menus);
   $('fl').innerHTML=(S.footerLinks||[]).map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');
   bind($('fl'),S.footerLinks);
