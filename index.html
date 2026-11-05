@@ -5,53 +5,96 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TWOWIN BET</title>
 <style>
-/* Pixel-locked to tting-2.com @ 1920×1072
-   header 60 · sidebar 80 · main 1400@x300 · content 1336 pad32
-   hero 1336×240 · cats 123×126 gap12 · cards 158×211 gap10 ×8
-   TWOWIN mint/silver skin */
+/* Twowin mint · yogiyo-style expanded sidebar 260 · tting content lock */
 :root{
   --bg:#070e18; --panel:#0d1826; --panel2:#111f30; --side:#0a1420;
-  --mint:#2EE8A8; --text:#e8eef4; --muted:#8a9aab; --line:#2EE8A833;
+  --mint:#2EE8A8; --mint2:#30D4A4; --text:#e8eef4; --muted:#8a9aab; --line:#2EE8A833;
   --silver:linear-gradient(180deg,#f7f9fb 0%,#c5ced8 52%,#8e99a6 100%);
-  --hh:60px; --sw:80px; --main-x:300px; --cw:1336px; --main-w:1400px;
+  --hh:60px; --sw:260px; --main-x:280px; --cw:1336px; --main-w:1400px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;min-width:1440px}
 a{color:inherit;text-decoration:none}
+body.side-collapsed{--sw:0px;--main-x:24px}
 header.desktop-header{
   width:1920px;max-width:100%;height:var(--hh);
-  display:flex;align-items:center;gap:10px;padding:0 24px;
+  display:flex;align-items:center;gap:12px;padding:0 24px;
   background:#070e18;border-bottom:1px solid var(--line);
   position:fixed;inset:0 0 auto 0;z-index:30;
 }
+.hamb{
+  width:36px;height:36px;border-radius:8px;border:1px solid #2EE8A844;
+  background:var(--panel2);color:var(--mint);cursor:pointer;
+  display:grid;place-items:center;font-size:18px;line-height:1;flex:0 0 auto;
+}
+.hamb:hover{border-color:var(--mint);box-shadow:0 0 10px #2EE8A855}
 header .logo{height:32px;width:auto}
 header .sp{flex:1}
 .ib{width:36px;height:36px;border-radius:50%;background:var(--panel2);border:1px solid #2EE8A844;display:grid;place-items:center;color:var(--mint);font-size:14px}
 .btn{border:0;border-radius:8px;height:40px;padding:0 22px;font-weight:700;font-size:14px;cursor:pointer;background:var(--silver);color:#0a1420}
 .btn.ghost{background:transparent;border:1px solid #2EE8A855;color:var(--text)}
 .btn.m{background:var(--mint);color:#062218}
-/* collapsed icon sidebar — 80px, item 56×52, icon 24, x=12 */
+
+/* ===== Yogiyo-style expanded sidebar 260 ===== */
 aside.sidebar{
   position:fixed;top:var(--hh);left:0;bottom:0;width:var(--sw);
   background:var(--side);border-right:1px solid var(--line);
-  overflow:auto;padding:12px 0;z-index:25;display:flex;flex-direction:column;align-items:center;gap:4px;
+  overflow:hidden auto;padding:12px 0 24px;z-index:25;
+  transition:width .2s ease, padding .2s ease;
 }
-aside.sidebar .side-item{
-  position:relative;width:56px;height:52px;margin:0 auto;
-  border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:var(--muted);font-size:9px;font-weight:700;gap:4px;cursor:pointer;
+body.side-collapsed aside.sidebar{padding:0;border-right:0;overflow:hidden}
+.side-sec{padding:6px 17px 10px;width:100%}
+.side-sec-title{
+  font-size:12px;font-weight:700;color:var(--muted);
+  letter-spacing:.02em;margin:8px 0 8px;padding:0 4px;
 }
-aside.sidebar .side-item .ic{
-  width:24px;height:24px;border-radius:6px;background:var(--panel2);
-  display:grid;place-items:center;color:var(--mint);font-size:11px;font-weight:900;overflow:hidden;
+.side-item{
+  position:relative;width:226px;height:42px;margin:0 0 4px;
+  border-radius:10px;display:flex;align-items:center;gap:12px;
+  padding:0 12px;color:#d7e2ec;font-size:14px;font-weight:600;
+  cursor:pointer;border:0;background:transparent;text-align:left;
 }
-aside.sidebar .side-item:hover,aside.sidebar .side-item.on{background:#12384f;color:var(--mint)}
-aside.sidebar .side-item.on{box-shadow:inset 3px 0 0 var(--mint)}
-/* main-desktop: 1400 @ x=300; inner 1336 with 32 pad → content x=332 */
+.side-item .ic{
+  width:24px;height:24px;flex:0 0 24px;color:var(--mint);
+  display:grid;place-items:center;
+}
+.side-item .ic svg{width:22px;height:22px;display:block}
+.side-item .lab{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-item .chev{color:var(--muted);font-size:12px;transition:transform .15s}
+.side-item.open .chev{transform:rotate(180deg);color:var(--mint)}
+.side-item:hover,.side-item.on{background:#12384f;color:var(--mint)}
+.side-item.on{box-shadow:inset 3px 0 0 var(--mint)}
+.side-sub{display:none;padding:0 0 6px 36px}
+.side-item.open + .side-sub{display:block}
+.side-sub a{
+  display:block;height:32px;line-height:32px;font-size:13px;color:var(--muted);
+  border-radius:8px;padding:0 10px;
+}
+.side-sub a:hover{color:var(--mint);background:#12384f66}
+.side-item.gen{height:38px;font-size:13px;font-weight:500;color:#c5d0db}
+.side-card{
+  width:226px;height:58px;border-radius:12px;margin:4px 0 8px;
+  background:linear-gradient(135deg,#12384f 0%,#0d1826 60%);
+  border:1px solid #2EE8A855;display:flex;align-items:center;gap:12px;
+  padding:0 12px;cursor:pointer;overflow:hidden;
+  box-shadow:inset 0 0 18px #2EE8A820;
+}
+.side-card:hover{border-color:var(--mint);box-shadow:0 0 14px #2EE8A855}
+.side-card .ic{
+  width:36px;height:36px;border-radius:10px;flex:0 0 36px;
+  background:linear-gradient(135deg,#2EE8A8,#0a3a34);display:grid;place-items:center;color:#fff;
+}
+.side-card .ic svg{width:22px;height:22px}
+.side-card .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.side-card .txt b{font-size:14px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-card .txt small{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-card.tv .ic{background:linear-gradient(135deg,#30D4A4,#0b5d4f)}
+
 main.main-desktop{
   margin:var(--hh) 0 0 var(--main-x);
   width:var(--main-w);max-width:calc(100% - var(--main-x));
-  padding:32px 32px 48px; /* 32 pad → content 1336 inside 1400 */
+  padding:32px 32px 48px;
+  transition:margin .2s ease;
 }
 .hero-banner{
   width:1336px;max-width:100%;height:240px;border-radius:14px;overflow:hidden;
@@ -64,16 +107,30 @@ main.main-desktop{
   border:0;background:#000a;color:#fff;cursor:pointer;font-size:18px;z-index:2;
 }
 .hero-banner .arrow.l{left:12px}.hero-banner .arrow.r{right:12px}
-.quick-nav-section{width:1336px;max-width:100%;height:126px;margin:30px 0 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(123px,1fr));gap:12px}
-.main-card{
-  position:relative;width:100%;height:126px;
-  background:var(--panel);border:1px solid #2EE8A844;border-radius:12px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  font-size:13px;font-weight:700;box-shadow:inset 0 0 18px #2EE8A814;
+
+/* Category quick-nav: flush mint chrome tile + KO/EN label bar */
+.quick-nav-section{
+  width:1336px;max-width:100%;margin:30px 0 30px;
+  display:grid;grid-template-columns:repeat(7,1fr);gap:12px;
 }
-.main-card .ic{width:40px;height:40px;border-radius:10px;background:var(--silver);display:grid;place-items:center;color:#0a1420;font-weight:900;font-size:14px;overflow:hidden}
-.main-card .ic img{width:100%;height:100%;object-fit:cover}
+.main-card{
+  position:relative;width:100%;height:148px;
+  background:var(--panel);border:1px solid #2EE8A844;border-radius:12px;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:inset 0 0 18px #2EE8A814;padding:0;
+}
+.main-card img.tile{
+  width:100%;height:104px;object-fit:cover;object-position:top center;
+  display:block;flex:0 0 104px;background:linear-gradient(135deg,#2EE8A8,#070e18);
+}
+.main-card .lbl{
+  flex:1;background:#2a2f38;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:1px;padding:4px 6px;text-align:center;
+}
+.main-card .lbl b{color:#fff;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.main-card .lbl small{color:#9aa3ae;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .main-card:hover{border-color:var(--mint);box-shadow:0 0 14px #2EE8A866}
+
 .section-head{
   width:1336px;max-width:100%;height:38px;display:flex;align-items:center;gap:10px;margin:0 0 16px;
 }
@@ -87,9 +144,9 @@ section.game-section{width:1336px;max-width:100%;margin-bottom:28px}
 .pachinko-game-card-info{
   position:relative;flex:0 0 158px;width:158px;height:211px;
   border-radius:10px;overflow:hidden;border:1px solid #2EE8A855;background:var(--panel);
+  display:flex;flex-direction:column;
 }
-.pachinko-game-card-info{display:flex;flex-direction:column}
-.pachinko-game-card-info img{width:158px;height:155px;object-fit:cover;object-position:top center;display:block;background:#0d1826;flex:0 0 155px}
+.pachinko-game-card-info img{width:158px;height:155px;object-fit:cover;object-position:top center;display:block;background:linear-gradient(135deg,#2EE8A8,#070e18);flex:0 0 155px}
 .pachinko-game-card-info .lbl{flex:1;background:#2a2f38;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;padding:4px 6px;text-align:center}
 .pachinko-game-card-info .lbl b{color:#fff;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .pachinko-game-card-info .lbl small{color:#9aa3ae;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
@@ -99,7 +156,7 @@ footer{
   margin-left:var(--main-x);width:var(--main-w);max-width:calc(100% - var(--main-x));
   background:#070e18;border-top:1px solid var(--line);
   padding:22px 32px;color:var(--muted);font-size:12px;
-  display:flex;flex-wrap:wrap;align-items:center;gap:18px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:18px;transition:margin .2s ease;
 }
 footer .logo{height:26px}
 footer nav{display:flex;flex-wrap:wrap;gap:14px;flex:1}
@@ -115,6 +172,7 @@ footer nav span{position:relative}
 </head>
 <body>
 <header class="desktop-header">
+  <button class="hamb" id="hamb" type="button" aria-label="메뉴">☰</button>
   <img class="logo" src="img/logo.png" alt="TWOWIN">
   <div class="sp"></div>
   <div class="ib">👤</div>
@@ -145,7 +203,7 @@ footer nav span{position:relative}
 </div>
 <script src="config.js"></script>
 <script>
-const KEY='twowin-tting-v5';
+const KEY='twowin-tting-v6';
 let S=JSON.parse(localStorage.getItem(KEY)||'null')||JSON.parse(JSON.stringify(SITE));
 const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
 const $=id=>document.getElementById(id);
@@ -161,15 +219,89 @@ function bind(el,arr){
     save();R();
   });
 }
+
+const ICONS={
+  pac:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l5 3"/></svg>`,
+  cas:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="10" height="14" rx="1.5"/><rect x="10" y="7" width="10" height="14" rx="1.5"/></svg>`,
+  slt:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h8"/></svg>`,
+  spo:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4c2 2.5 3 5 3 8s-1 5.5-3 8c-2-2.5-3-5-3-8s1-5.5 3-8zM4 12h16"/></svg>`,
+  bok:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3V4z"/><path d="M8 4v16"/><circle cx="15" cy="11" r="2"/></svg>`,
+  b365:`<svg viewBox="0 0 24 24" fill="currentColor"><text x="12" y="16" text-anchor="middle" font-size="8" font-weight="800" font-family="Arial">365</text></svg>`,
+  mini:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>`,
+  poly:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 5v8l-8 5-8-5V8l8-5z"/><path d="M12 12l8-4M12 12v10M12 12L4 8"/></svg>`,
+  brd:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.2 4.5L19 8.2l-3.5 3.4.8 4.9L12 14.8 7.7 16.5l.8-4.9L5 8.2l4.8-.7L12 3z"/></svg>`,
+  evt:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="6" width="14" height="14" rx="2"/><circle cx="10" cy="13" r="1.5"/><circle cx="14" cy="15" r="1.5"/></svg>`,
+  tv:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7l4-3 4 3M12 19v2"/></svg>`,
+  user:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>`,
+  cal:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>`,
+  cs:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 0116 0v5a2 2 0 01-2 2h-2v-6h4M4 13h4v6H6a2 2 0 01-2-2v-4z"/></svg>`,
+  faq:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 9a4 4 0 017.2-2.4A3.5 3.5 0 0116 13h-2a2 2 0 00-2 2v1"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>`,
+  doc:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>`,
+  globe:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.8 3.5 5.5 3.5 8S14.5 17.2 12 20c-2.5-2.8-3.5-5.5-3.5-8S9.5 6.8 12 4z"/></svg>`,
+  tg:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11l15-6-3 15-5-4-3 3-1-5-3-3z"/></svg>`
+};
+const icon=k=>ICONS[k]||ICONS.pac;
+
+function renderSide(){
+  const secs=S.sideSections||SITE.sideSections||[];
+  let html='';
+  let flatIdx=0;
+  const flat=S.sideMenus||[];
+  secs.forEach((sec,si)=>{
+    html+=`<div class="side-sec" data-si="${si}">`;
+    html+=`<div class="side-sec-title">${sec.title}</div>`;
+    if(sec.kind==='eventCard'||sec.kind==='tvCard'){
+      const c=sec.card||{};
+      html+=`<div class="side-card ${sec.kind==='tvCard'?'tv':''} ed"><div class="ic">${icon(c.icon)}</div><div class="txt"><b>${c.title||''}</b><small>${c.sub||''}</small></div></div>`;
+    }else{
+      const items=sec.items||[];
+      const isGen=sec.title==='일반적인';
+      items.forEach((it,ii)=>{
+        const exp=!!it.expandable;
+        html+=`<button type="button" class="side-item ed ${isGen?'gen':''}" data-exp="${exp?1:0}" data-si="${si}" data-ii="${ii}">
+          <span class="ic">${icon(it.icon)}</span><span class="lab">${it.label}</span>
+          ${exp?'<span class="chev">▾</span>':''}
+          ${document.body.classList.contains('edit')?`<span class="x" data-a="sdel" data-si="${si}" data-ii="${ii}" style="position:absolute;right:4px;top:4px;display:block">×</span>`:''}
+        </button>`;
+        if(exp){
+          html+=`<div class="side-sub">${(it.children||[]).map(ch=>`<a href="#">${ch}</a>`).join('')}</div>`;
+        }
+        flatIdx++;
+      });
+    }
+    html+='</div>';
+  });
+  $('side').innerHTML=html;
+  $('side').querySelectorAll('.side-item[data-exp="1"]').forEach(btn=>{
+    btn.onclick=e=>{
+      if(e.target.closest('[data-a]'))return;
+      btn.classList.toggle('open');
+    };
+  });
+  $('side').querySelectorAll('[data-a="sdel"]').forEach(b=>{
+    b.onclick=e=>{
+      e.preventDefault();e.stopPropagation();
+      const si=+b.dataset.si,ii=+b.dataset.ii;
+      if(!confirm('삭제할까요?'))return;
+      (S.sideSections[si].items||[]).splice(ii,1);
+      save();R();
+    };
+  });
+}
+
 function R(){
-  const sideMenus=S.sideMenus||S.menus||[];
-  $('side').innerHTML=sideMenus.map((m,i)=>`<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic">${m[0]}</div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`).join('');
-  bind($('side'),sideMenus);
-  $('cats').innerHTML=(S.menus||[]).map((c,i)=>`<div class="main-card ed">${C(i)}<div class="ic"><img src="icons/cat-${(S.menuIcons&&S.menuIcons[i])||n2(i)}.png" onerror="this.replaceWith(document.createTextNode('${c[0]}'))"></div>${c}</div>`).join('');
+  renderSide();
+  const ens=S.menuEn||SITE.menuEn||[];
+  $('cats').innerHTML=(S.menus||[]).map((c,i)=>{
+    const en=ens[i]||'';
+    const ic=(S.menuIcons&&S.menuIcons[i])||n2(i);
+    return `<div class="main-card ed">${C(i)}<img class="tile" src="icons/cat-${ic}.png" alt="${c}" onerror="this.style.opacity=.3"><div class="lbl"><b contenteditable>${c}</b><small contenteditable>${en}</small></div></div>`;
+  }).join('');
   bind($('cats'),S.menus);
   $('fl').innerHTML=(S.footerLinks||[]).map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');
   bind($('fl'),S.footerLinks);
-  const KO={evolution:'에볼루션',pragmatic:'프라그마틱',blackjack:'블랙잭',baccarat:'바카라',roulette:'룰렛',wheel:'휠',microgaming:'마이크로게이밍',playtech:'플레이텍',dreamgaming:'드림게이밍',sexy:'섹시게이밍',ezugi:'이주기',skywind:'스카이윈드',betradar:'벳레이더',hacksaw:'핵쏘',pgsoft:'PG소프트',habanero:'하바네로',netent:'넷엔트',cq9:'CQ9',booongo:'부운고',redtiger:'레드타이거',relax:'릴렉스'};
+  const KO={evolution:'에볼루션',pragmatic:'프라그마틱',blackjack:'블랙잭',baccarat:'바카라',roulette:'룰렛',wheel:'휠',microgaming:'마이크로게이밍',playtech:'플레이텍',dreamgaming:'드림게이밍',sexy:'섹시게이밍',ezugi:'이주기',skywind:'스카이윈드',betradar:'벳레이더',hacksaw:'핵쏘',pgsoft:'PG소프트',habanero:'하바네로',netent:'넷엔트',cq9:'CQ9',booongo:'부운고',boongo:'부운고',redtiger:'레드타이거',relax:'릴렉스',allbet:'올벳',oriental:'오리엔탈',playace:'플레이에이스',sportsbook:'스포츠북',saba:'사바',bt1:'BT1'};
+  const EN={evolution:'EVOLUTION',pragmatic:'PRAGMATIC',microgaming:'MICROGAMING',pgsoft:'PG SOFT',habanero:'HABANERO',netent:'NETENT',boongo:'BOOONGO',allbet:'ALLBET',oriental:'ORIENTAL',playace:'PLAYACE',sportsbook:'SPORTSBOOK',saba:'SABA',bt1:'BT1'};
   $('rails').innerHTML=(S.rails||[]).map((r,ri)=>`<section class="game-section ed">
     <div class="section-head">
       <h2><span class="dot"></span>${r.title}</h2>
@@ -178,10 +310,13 @@ function R(){
       <button class="x" style="position:static" data-s="${ri}">×</button>
       <button class="mv" style="position:static;border-radius:8px;width:auto;padding:0 8px" data-su="${ri}">▲</button>
     </div>
-    <div class="rail" data-ri="${ri}">${(r.items&&r.items.length?r.items:Array(8).fill(null)).slice(0,8).map((f,i)=>f
-      ?`<div class="pachinko-game-card-info ed">${C(i)}<img src="${r.dir}/${f}" alt="${f}" title="${r.dir}/${f}" onerror="this.parentElement.classList.add('empty');this.remove()"><div class="lbl"><b contenteditable>${KO[f.replace(/\.\w+$/,'').toLowerCase()]||f.replace(/\.\w+$/,'')}</b><small contenteditable>${f.replace(/\.\w+$/,'').replace(/[-_]/g,' ').toUpperCase()}</small></div></div>`
-      :`<div class="pachinko-game-card-info empty ed">${C(i)}</div>`
-    ).join('')}</div>
+    <div class="rail" data-ri="${ri}">${(r.items&&r.items.length?r.items:Array(8).fill(null)).slice(0,8).map((f,i)=>{
+      if(!f) return `<div class="pachinko-game-card-info empty ed">${C(i)}</div>`;
+      const key=f.replace(/\.\w+$/,'').toLowerCase();
+      const ko=KO[key]||key;
+      const en=EN[key]||key.replace(/[-_]/g,' ').toUpperCase();
+      return `<div class="pachinko-game-card-info ed">${C(i)}<img src="${r.dir}/${f}" alt="${f}" title="${r.dir}/${f}" onerror="this.parentElement.classList.add('empty');this.remove()"><div class="lbl"><b contenteditable>${ko}</b><small contenteditable>${en}</small></div></div>`;
+    }).join('')}</div>
   </section>`).join('');
   document.querySelectorAll('.rail').forEach(el=>{
     const ri=+el.dataset.ri;
@@ -192,7 +327,8 @@ function R(){
   document.querySelectorAll('[data-su]').forEach(b=>b.onclick=()=>{const i=+b.dataset.su;if(i>0){[S.rails[i-1],S.rails[i]]=[S.rails[i],S.rails[i-1]];save();R()}});
 }
 R();
-$('tg').onclick=()=>{document.body.classList.toggle('edit');$('tg').textContent=document.body.classList.contains('edit')?'편집 끝':'편집모드'};
+$('hamb').onclick=()=>document.body.classList.toggle('side-collapsed');
+$('tg').onclick=()=>{document.body.classList.toggle('edit');$('tg').textContent=document.body.classList.contains('edit')?'편집 끝':'편집모드';R()};
 $('rs').onclick=()=>{if(confirm('config.js 원래대로?')){localStorage.removeItem(KEY);S=JSON.parse(JSON.stringify(SITE));R()}};
 $('ex').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['window.SITE = '+JSON.stringify(S,null,2)+';\n'],{type:'text/javascript'}));a.download='config.js';a.click()};
 </script>
