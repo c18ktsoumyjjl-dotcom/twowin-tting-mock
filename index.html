@@ -177,13 +177,13 @@ function bind(el,arr){
 }
 function R(){
   const sideMenus=S.sideMenus||S.menus||[];
-  $('side').innerHTML=sideMenus.map((m,i)=>{const si=String(i+1).padStart(2,'0');return `<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic"><img src="icons/side-${si}.png" alt="" onerror="this.replaceWith(document.createTextNode('${m[0]}'))"></div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`;}).join('');
+  $('side').innerHTML=sideMenus.map((m,i)=>{const si=String(i+1).padStart(2,'0');return `<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic"><img src="icons/side-${si}.png?v=metal3" alt="" onerror="this.replaceWith(document.createTextNode('${m[0]}'))"></div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`;}).join('');
   bind($('side'),sideMenus);
   const EN=S.menuEn||['SPORTS','ESPORTS','SPORTSBOOK','POLYMARKET','CASINO','SLOTS','BET365'];
   $('cats').innerHTML=(S.menus||[]).map((c,i)=>{
     const ic=(S.menuIcons&&S.menuIcons[i])||n2(i);
     const en=EN[i]||'';
-    return `<div class="main-card ed">${C(i)}<img class="tile" src="icons/cat-${ic}.png" alt="${c}" onerror="this.style.opacity=.3"><div class="lbl"><b contenteditable>${c}</b><small contenteditable>${en}</small></div></div>`;
+    return `<div class="main-card ed">${C(i)}<img class="tile" src="icons/cat-${ic}.png?v=metal3" alt="${c}" onerror="this.style.opacity=.3"><div class="lbl"><b contenteditable>${c}</b><small contenteditable>${en}</small></div></div>`;
   }).join('');
   bind($('cats'),S.menus);
   $('fl').innerHTML=(S.footerLinks||[]).map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');

@@ -7,3 +7,7 @@
 3. 메뉴·게임 삭제/순서: 오른쪽 아래 [편집모드] → × 삭제, ◀ ▶ 순서, ▲ 섹션 위로 (브라우저에 자동 저장)
    [초기화]=원래대로, [설정 내보내기]=바뀐 config.js 다운로드 → 이 폴더 config.js에 덮어쓰면 영구 반영
 4. 게임 추가: 폴더에 PNG 넣고 config.js 의 items 목록에 파일명 한 줄 추가
+
+## 2026-11-06 metal silver icons
+- cats + sides: brushed chrome icon-over-EN + sidebar glyphs
+- preview/ kept local (not always deployed)
