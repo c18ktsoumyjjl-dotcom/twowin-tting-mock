@@ -88,7 +88,7 @@ section.game-section{width:1336px;max-width:100%;margin-bottom:28px}
   position:relative;flex:0 0 158px;width:158px;height:211px;
   border-radius:10px;overflow:hidden;border:1px solid #2EE8A855;background:var(--panel);
 }
-.pachinko-game-card-info img{width:158px;height:211px;object-fit:cover;display:block}
+.pachinko-game-card-info img{width:158px;height:211px;object-fit:contain;display:block;background:#0d1826}
 .pachinko-game-card-info.empty{background:linear-gradient(180deg,#0d1826,#0a1420)}
 .pachinko-game-card-info:hover{box-shadow:0 0 16px #2EE8A888}
 footer{
@@ -141,7 +141,7 @@ footer nav span{position:relative}
 </div>
 <script src="config.js"></script>
 <script>
-const KEY='twowin-tting-v3';
+const KEY='twowin-tting-v4';
 let S=JSON.parse(localStorage.getItem(KEY)||'null')||JSON.parse(JSON.stringify(SITE));
 const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
 const $=id=>document.getElementById(id);

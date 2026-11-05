@@ -13,35 +13,32 @@ window.SITE = {
       "title": "파칭코",
       "dir": "casino",
       "items": [
-        "casino-btn-01-1024.png","casino-btn-02-1024.png","casino-btn-03-1024.png",
-        "casino-btn-04-1024.png","casino-btn-05-1024.png","casino-btn-06-1024.png",
-        "casino-btn-01-1024.png","casino-btn-02-1024.png"
+        "evolution.png","pragmatic.png","allbet.png","oriental.png",
+        "microgaming.png","playace.png","evolution.png","pragmatic.png"
       ]
     },
     {
       "title": "카지노",
       "dir": "casino",
       "items": [
-        "casino-btn-01-1024.png","casino-btn-02-1024.png","casino-btn-03-1024.png",
-        "casino-btn-04-1024.png","casino-btn-05-1024.png","casino-btn-06-1024.png",
-        "casino-btn-03-1024.png","casino-btn-04-1024.png"
+        "evolution.png","pragmatic.png","allbet.png","oriental.png",
+        "microgaming.png","playace.png","evolution.png","pragmatic.png"
       ]
     },
     {
       "title": "슬롯",
       "dir": "slots",
       "items": [
-        "slot-btn-01-1024.png","slot-btn-02-1024.png","slot-btn-03-1024.png",
-        "slot-btn-04-1024.png","slot-btn-05-1024.png","slot-btn-06-1024.png",
-        "slot-btn-07-1024.png","slot-btn-01-1024.png"
+        "pragmatic.png","pgsoft.png","habanero.png","boongo.png",
+        "netent.png","microgaming.png","oriental.png","pragmatic.png"
       ]
     },
     {
       "title": "스포츠",
       "dir": "sports",
       "items": [
-        "sport-btn-01-1024.png","sport-btn-02-1024.png","sport-btn-03-1024.png","sport-btn-04-1024.png",
-        "sport-btn-01-1024.png","sport-btn-02-1024.png","sport-btn-03-1024.png","sport-btn-04-1024.png"
+        "sportsbook.png","saba.png","bt1.png","sportsbook.png",
+        "saba.png","bt1.png","sportsbook.png","saba.png"
       ]
     },
     {
