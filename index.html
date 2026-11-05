@@ -64,15 +64,27 @@ main.main-desktop{
   border:0;background:#000a;color:#fff;cursor:pointer;font-size:18px;z-index:2;
 }
 .hero-banner .arrow.l{left:12px}.hero-banner .arrow.r{right:12px}
-.quick-nav-section{width:1336px;max-width:100%;height:126px;margin:30px 0 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(123px,1fr));gap:12px}
-.main-card{
-  position:relative;width:100%;height:126px;
-  background:var(--panel);border:1px solid #2EE8A844;border-radius:12px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  font-size:13px;font-weight:700;box-shadow:inset 0 0 18px #2EE8A814;
+/* Category quick-nav: mint chrome lettering tile + KO/EN label */
+.quick-nav-section{
+  width:1336px;max-width:100%;margin:30px 0 30px;
+  display:grid;grid-template-columns:repeat(7,1fr);gap:12px;
 }
-.main-card .ic{width:40px;height:40px;border-radius:10px;background:var(--silver);display:grid;place-items:center;color:#0a1420;font-weight:900;font-size:14px;overflow:hidden}
-.main-card .ic img{width:100%;height:100%;object-fit:cover}
+.main-card{
+  position:relative;width:100%;height:148px;
+  background:var(--panel);border:1px solid #2EE8A844;border-radius:12px;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 0 12px #2EE8A822;
+}
+.main-card img.tile{
+  width:100%;height:104px;object-fit:cover;object-position:center;
+  display:block;flex:0 0 104px;background:linear-gradient(135deg,#2EE8A8,#070e18);
+}
+.main-card .lbl{
+  flex:1;background:#2a2f38;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:1px;padding:4px 6px;text-align:center;
+}
+.main-card .lbl b{color:#fff;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.main-card .lbl small{color:#9aa3ae;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .main-card:hover{border-color:var(--mint);box-shadow:0 0 14px #2EE8A866}
 .section-head{
   width:1336px;max-width:100%;height:38px;display:flex;align-items:center;gap:10px;margin:0 0 16px;
@@ -145,7 +157,7 @@ footer nav span{position:relative}
 </div>
 <script src="config.js"></script>
 <script>
-const KEY='twowin-tting-v5';
+const KEY='twowin-tting-v6';
 let S=JSON.parse(localStorage.getItem(KEY)||'null')||JSON.parse(JSON.stringify(SITE));
 const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
 const $=id=>document.getElementById(id);
@@ -165,7 +177,12 @@ function R(){
   const sideMenus=S.sideMenus||S.menus||[];
   $('side').innerHTML=sideMenus.map((m,i)=>`<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic">${m[0]}</div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`).join('');
   bind($('side'),sideMenus);
-  $('cats').innerHTML=(S.menus||[]).map((c,i)=>`<div class="main-card ed">${C(i)}<div class="ic"><img src="icons/cat-${(S.menuIcons&&S.menuIcons[i])||n2(i)}.png" onerror="this.replaceWith(document.createTextNode('${c[0]}'))"></div>${c}</div>`).join('');
+  const EN=S.menuEn||['SPORTS','ESPORTS','SPORTSBOOK','POLYMARKET','CASINO','SLOTS','BET365'];
+  $('cats').innerHTML=(S.menus||[]).map((c,i)=>{
+    const ic=(S.menuIcons&&S.menuIcons[i])||n2(i);
+    const en=EN[i]||'';
+    return `<div class="main-card ed">${C(i)}<img class="tile" src="icons/cat-${ic}.png" alt="${c}" onerror="this.style.opacity=.3"><div class="lbl"><b contenteditable>${c}</b><small contenteditable>${en}</small></div></div>`;
+  }).join('');
   bind($('cats'),S.menus);
   $('fl').innerHTML=(S.footerLinks||[]).map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');
   bind($('fl'),S.footerLinks);

@@ -6,6 +6,7 @@ window.SITE = {
     "스포츠","e스포츠","스포츠북","폴리마켓","카지노","슬롯","BET365"
   ],
   "menuIcons": ["02","03","04","05","06","07","09"],
+  "menuEn": ["SPORTS","ESPORTS","SPORTSBOOK","POLYMARKET","CASINO","SLOTS","BET365"],
   "footerLinks": [
     "홈","스포츠 베팅","라이브 카지노","슬롯","E스포츠","이벤트","FAQ","이용규정"
   ],
