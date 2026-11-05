@@ -42,9 +42,10 @@ aside.sidebar .side-item{
   color:var(--muted);font-size:9px;font-weight:700;gap:4px;cursor:pointer;
 }
 aside.sidebar .side-item .ic{
-  width:24px;height:24px;border-radius:6px;background:var(--panel2);
+  width:28px;height:28px;border-radius:6px;background:transparent;
   display:grid;place-items:center;color:var(--mint);font-size:11px;font-weight:900;overflow:hidden;
 }
+aside.sidebar .side-item .ic img{width:28px;height:28px;object-fit:contain;display:block;filter:drop-shadow(0 0 4px #2EE8A855)}
 aside.sidebar .side-item:hover,aside.sidebar .side-item.on{background:#12384f;color:var(--mint)}
 aside.sidebar .side-item.on{box-shadow:inset 3px 0 0 var(--mint)}
 /* main-desktop: 1400 @ x=300; inner 1336 with 32 pad → content x=332 */
@@ -67,21 +68,22 @@ main.main-desktop{
 /* Category quick-nav: transparent silver chrome icon above KO/EN label (띵벳 style) */
 .quick-nav-section{
   width:1336px;max-width:100%;margin:30px 0 30px;
-  display:grid;grid-template-columns:repeat(7,1fr);gap:12px;
+  display:grid;grid-template-columns:repeat(7,1fr);gap:14px;
 }
 .main-card{
-  position:relative;width:100%;height:148px;
-  background:var(--panel);border:1px solid #2EE8A844;border-radius:12px;
+  position:relative;width:100%;aspect-ratio:123/136;height:auto;min-height:126px;
+  background:#121820;border:1px solid #2EE8A833;border-radius:16px;
   display:flex;flex-direction:column;overflow:hidden;
-  box-shadow:0 0 12px #2EE8A822;
+  box-shadow:0 0 10px #2EE8A818;
 }
 .main-card img.tile{
-  width:100%;height:104px;object-fit:contain;object-position:center;
-  display:block;flex:0 0 104px;background:transparent;padding:6px 8px 0;box-sizing:border-box;
+  width:100%;flex:1 1 auto;min-height:0;height:auto;
+  object-fit:contain;object-position:center center;
+  display:block;background:transparent;padding:10px 10px 2px;box-sizing:border-box;
 }
 .main-card .lbl{
-  flex:1;background:#2a2f38;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;gap:1px;padding:4px 6px;text-align:center;
+  flex:0 0 auto;background:transparent;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:1px;padding:2px 8px 12px;text-align:center;
 }
 .main-card .lbl b{color:#fff;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .main-card .lbl small{color:#9aa3ae;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
@@ -175,7 +177,7 @@ function bind(el,arr){
 }
 function R(){
   const sideMenus=S.sideMenus||S.menus||[];
-  $('side').innerHTML=sideMenus.map((m,i)=>`<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic">${m[0]}</div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`).join('');
+  $('side').innerHTML=sideMenus.map((m,i)=>{const si=String(i+1).padStart(2,'0');return `<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic"><img src="icons/side-${si}.png" alt="" onerror="this.replaceWith(document.createTextNode('${m[0]}'))"></div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`;}).join('');
   bind($('side'),sideMenus);
   const EN=S.menuEn||['SPORTS','ESPORTS','SPORTSBOOK','POLYMARKET','CASINO','SLOTS','BET365'];
   $('cats').innerHTML=(S.menus||[]).map((c,i)=>{
