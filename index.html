@@ -88,7 +88,11 @@ section.game-section{width:1336px;max-width:100%;margin-bottom:28px}
   position:relative;flex:0 0 158px;width:158px;height:211px;
   border-radius:10px;overflow:hidden;border:1px solid #2EE8A855;background:var(--panel);
 }
-.pachinko-game-card-info img{width:158px;height:211px;object-fit:contain;display:block;background:#0d1826}
+.pachinko-game-card-info{display:flex;flex-direction:column}
+.pachinko-game-card-info img{width:158px;height:155px;object-fit:cover;object-position:top center;display:block;background:#0d1826;flex:0 0 155px}
+.pachinko-game-card-info .lbl{flex:1;background:#2a2f38;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;padding:4px 6px;text-align:center}
+.pachinko-game-card-info .lbl b{color:#fff;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.pachinko-game-card-info .lbl small{color:#9aa3ae;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .pachinko-game-card-info.empty{background:linear-gradient(180deg,#0d1826,#0a1420)}
 .pachinko-game-card-info:hover{box-shadow:0 0 16px #2EE8A888}
 footer{
@@ -165,6 +169,7 @@ function R(){
   bind($('cats'),S.menus);
   $('fl').innerHTML=(S.footerLinks||[]).map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');
   bind($('fl'),S.footerLinks);
+  const KO={evolution:'에볼루션',pragmatic:'프라그마틱',blackjack:'블랙잭',baccarat:'바카라',roulette:'룰렛',wheel:'휠',microgaming:'마이크로게이밍',playtech:'플레이텍',dreamgaming:'드림게이밍',sexy:'섹시게이밍',ezugi:'이주기',skywind:'스카이윈드',betradar:'벳레이더',hacksaw:'핵쏘',pgsoft:'PG소프트',habanero:'하바네로',netent:'넷엔트',cq9:'CQ9',booongo:'부운고',redtiger:'레드타이거',relax:'릴렉스'};
   $('rails').innerHTML=(S.rails||[]).map((r,ri)=>`<section class="game-section ed">
     <div class="section-head">
       <h2><span class="dot"></span>${r.title}</h2>
@@ -174,7 +179,7 @@ function R(){
       <button class="mv" style="position:static;border-radius:8px;width:auto;padding:0 8px" data-su="${ri}">▲</button>
     </div>
     <div class="rail" data-ri="${ri}">${(r.items&&r.items.length?r.items:Array(8).fill(null)).slice(0,8).map((f,i)=>f
-      ?`<div class="pachinko-game-card-info ed">${C(i)}<img src="${r.dir}/${f}" alt="${f}" title="${r.dir}/${f}" onerror="this.parentElement.classList.add('empty');this.remove()"></div>`
+      ?`<div class="pachinko-game-card-info ed">${C(i)}<img src="${r.dir}/${f}" alt="${f}" title="${r.dir}/${f}" onerror="this.parentElement.classList.add('empty');this.remove()"><div class="lbl"><b contenteditable>${KO[f.replace(/\.\w+$/,'').toLowerCase()]||f.replace(/\.\w+$/,'')}</b><small contenteditable>${f.replace(/\.\w+$/,'').replace(/[-_]/g,' ').toUpperCase()}</small></div></div>`
       :`<div class="pachinko-game-card-info empty ed">${C(i)}</div>`
     ).join('')}</div>
   </section>`).join('');
