@@ -1,57 +1,195 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TWOWIN BET</title>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TWOWIN BET</title>
 <style>
-/* 띵벳 1918px 기준 실측: 헤더60 / 사이드64 / 본문1336 / 배너238 / 카테고리122x125 gap13 / 게임타일 161 gap6 */
-:root{--bg:#070e18;--panel:#0d1826;--panel2:#111f30;--mint:#30D4A4;--silver:linear-gradient(180deg,#f4f6f8,#c3cbd4 55%,#8d97a3);--hh:60px;--sw:64px;--cw:1336px}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#dfe8ef;font-family:'Pretendard','Noto Sans KR',sans-serif}
-header{height:var(--hh);display:flex;align-items:center;padding:0 20px;background:#0a1420;border-bottom:1px solid #30d4a433;position:fixed;inset:0 0 auto 0;z-index:5}
-header .logo{height:34px}header .sp{flex:1}.ib{width:34px;height:34px;border-radius:8px;background:var(--panel2);margin-right:10px;border:1px solid #30d4a444}
-.btn{border:0;border-radius:8px;height:40px;padding:0 22px;font-weight:700;font-size:14px;cursor:pointer;background:var(--silver);color:#0a1420;margin-left:10px}.btn.m{background:var(--mint)}
-.side{position:fixed;top:var(--hh);left:0;bottom:0;width:var(--sw);background:#0a1420;border-right:1px solid #30d4a422;display:flex;flex-direction:column;align-items:center;padding-top:14px;gap:12px;overflow:auto;z-index:4}
-.side a{position:relative;width:36px;height:36px;border-radius:9px;background:var(--panel2);display:grid;place-items:center;color:var(--mint);font-size:12px;font-weight:800;text-decoration:none;flex:0 0 auto}
-.side a:hover{box-shadow:0 0 10px var(--mint)}
-main{margin:var(--hh) 0 0 var(--sw);padding:34px 0 0}.in{width:var(--cw);max-width:calc(100% - 40px);margin:0 auto}
-.banner{position:relative;height:238px;border-radius:14px;overflow:hidden;border:1px solid #30d4a433;background:#0d1826 center/cover}
-.banner img{width:100%;height:100%;object-fit:cover;display:block}
-.cats{display:flex;gap:13px;margin:32px 0 30px}.cat{position:relative;flex:0 0 calc((100% - 117px)/10);height:125px;background:var(--panel);border:1px solid #30d4a455;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;font-weight:700;box-shadow:inset 0 0 18px #30d4a41a}
-.cat .ic{width:46px;height:46px;margin-bottom:12px;border-radius:10px;background:var(--silver);display:grid;place-items:center;color:#0a1420;font-weight:900;overflow:hidden}.cat .ic img{width:100%;height:100%;object-fit:cover}
-.cat:hover{border-color:var(--mint);box-shadow:0 0 16px #30d4a477}
-h2{display:flex;align-items:center;gap:10px;font-size:22px;margin:0 0 16px;height:36px}h2 .dot{width:24px;height:24px;border-radius:50%;background:var(--mint)}h2 .sp{flex:1}
-.pill{height:32px;padding:0 14px;border-radius:16px;background:var(--panel2);border:1px solid #30d4a433;color:#cde;font-size:13px}.pill.on{background:var(--mint);color:#062}
-section{margin-bottom:34px}.rail{display:flex;gap:6px;overflow-x:auto}
-.tile{position:relative;flex:0 0 calc((100% - 42px)/8);border-radius:8px;overflow:hidden;border:1px solid #30d4a466;background:var(--panel)}
-.tile img{width:100%;aspect-ratio:161/200;object-fit:cover;display:block}.tile:hover{box-shadow:0 0 16px var(--mint)}
-footer{margin-left:var(--sw);background:#0a1420;border-top:1px solid #30d4a422;padding:22px 30px;color:#7d8c99;font-size:12px;display:flex;align-items:center;gap:24px}
-footer nav{display:flex;gap:14px;flex:1}footer nav span{position:relative}
-.x,.mv{display:none;position:absolute;top:4px;z-index:3;border:0;border-radius:50%;width:22px;height:22px;cursor:pointer;font-weight:900;font-size:12px;padding:0}
-.x{right:4px;background:#e44;color:#fff}.mv{background:#fff;color:#000}.mv.l{left:4px}.mv.r{left:28px}
-.edit .x,.edit .mv{display:block}.edit .side .mv{display:none}.edit .ed{outline:1px dashed var(--mint)}
-#bar{position:fixed;right:16px;bottom:16px;display:flex;z-index:9}
-</style></head><body>
-<header><img class="logo" src="img/logo.png" alt=""><div class="sp"></div><div class="ib"></div><div class="ib"></div><button class="btn">로그인</button><button class="btn m">회원가입</button></header>
-<aside class="side" id="side"></aside>
-<main><div class="in"><div class="banner"><img src="img/banner.png" alt=""></div><div class="cats" id="cats"></div><div id="rails"></div></div></main>
-<footer><img src="img/logo.png" style="height:28px"><nav id="fl"></nav><span>저작권 © TWOWIN BET 모든 권리 보유.</span></footer>
-<div id="bar"><button class="btn m" id="tg">편집모드</button><button class="btn" id="ex">설정 내보내기</button><button class="btn" id="rs">초기화</button></div>
+/* Pixel-locked to tting-2.com @ 1920×1072
+   header 60 · sidebar 80 · main 1400@x300 · content 1336 pad32
+   hero 1336×240 · cats 123×126 gap12 · cards 158×211 gap10 ×8
+   TWOWIN mint/silver skin */
+:root{
+  --bg:#070e18; --panel:#0d1826; --panel2:#111f30; --side:#0a1420;
+  --mint:#2EE8A8; --text:#e8eef4; --muted:#8a9aab; --line:#2EE8A833;
+  --silver:linear-gradient(180deg,#f7f9fb 0%,#c5ced8 52%,#8e99a6 100%);
+  --hh:60px; --sw:80px; --main-x:300px; --cw:1336px; --main-w:1400px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;min-width:1440px}
+a{color:inherit;text-decoration:none}
+header.desktop-header{
+  width:1920px;max-width:100%;height:var(--hh);
+  display:flex;align-items:center;gap:10px;padding:0 24px;
+  background:#070e18;border-bottom:1px solid var(--line);
+  position:fixed;inset:0 0 auto 0;z-index:30;
+}
+header .logo{height:32px;width:auto}
+header .sp{flex:1}
+.ib{width:36px;height:36px;border-radius:50%;background:var(--panel2);border:1px solid #2EE8A844;display:grid;place-items:center;color:var(--mint);font-size:14px}
+.btn{border:0;border-radius:8px;height:40px;padding:0 22px;font-weight:700;font-size:14px;cursor:pointer;background:var(--silver);color:#0a1420}
+.btn.ghost{background:transparent;border:1px solid #2EE8A855;color:var(--text)}
+.btn.m{background:var(--mint);color:#062218}
+/* collapsed icon sidebar — 80px, item 56×52, icon 24, x=12 */
+aside.sidebar{
+  position:fixed;top:var(--hh);left:0;bottom:0;width:var(--sw);
+  background:var(--side);border-right:1px solid var(--line);
+  overflow:auto;padding:12px 0;z-index:25;display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+aside.sidebar .side-item{
+  position:relative;width:56px;height:52px;margin:0 auto;
+  border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--muted);font-size:9px;font-weight:700;gap:4px;cursor:pointer;
+}
+aside.sidebar .side-item .ic{
+  width:24px;height:24px;border-radius:6px;background:var(--panel2);
+  display:grid;place-items:center;color:var(--mint);font-size:11px;font-weight:900;overflow:hidden;
+}
+aside.sidebar .side-item:hover,aside.sidebar .side-item.on{background:#12384f;color:var(--mint)}
+aside.sidebar .side-item.on{box-shadow:inset 3px 0 0 var(--mint)}
+/* main-desktop: 1400 @ x=300; inner 1336 with 32 pad → content x=332 */
+main.main-desktop{
+  margin:var(--hh) 0 0 var(--main-x);
+  width:var(--main-w);max-width:calc(100% - var(--main-x));
+  padding:32px 32px 48px; /* 32 pad → content 1336 inside 1400 */
+}
+.hero-banner{
+  width:1336px;max-width:100%;height:240px;border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:var(--panel);position:relative;
+}
+.hero-banner .slide{width:1334px;max-width:100%;height:238px;margin:1px auto 0;display:block;object-fit:cover}
+.hero-banner .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted)}
+.hero-banner .arrow{
+  position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
+  border:0;background:#000a;color:#fff;cursor:pointer;font-size:18px;z-index:2;
+}
+.hero-banner .arrow.l{left:12px}.hero-banner .arrow.r{right:12px}
+.quick-nav-section{width:1336px;max-width:100%;height:126px;margin:30px 0 30px;display:flex;gap:12px}
+.main-card{
+  position:relative;flex:0 0 123px;width:123px;height:126px;
+  background:var(--panel);border:1px solid #2EE8A844;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  font-size:13px;font-weight:700;box-shadow:inset 0 0 18px #2EE8A814;
+}
+.main-card .ic{width:40px;height:40px;border-radius:10px;background:var(--silver);display:grid;place-items:center;color:#0a1420;font-weight:900;font-size:14px;overflow:hidden}
+.main-card .ic img{width:100%;height:100%;object-fit:cover}
+.main-card:hover{border-color:var(--mint);box-shadow:0 0 14px #2EE8A866}
+.section-head{
+  width:1336px;max-width:100%;height:38px;display:flex;align-items:center;gap:10px;margin:0 0 16px;
+}
+.section-head h2{margin:0;font-size:22px;line-height:36px;height:36px;font-weight:800;display:flex;align-items:center;gap:10px}
+.section-head .dot{width:10px;height:10px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+.section-head .sp{flex:1}
+.pill{height:28px;padding:0 12px;border-radius:14px;border:1px solid #2EE8A833;background:var(--panel2);color:#c7d5e0;font-size:12px;cursor:pointer}
+.pill.on{background:var(--mint);color:#062218;border-color:transparent;font-weight:700}
+section.game-section{width:1336px;max-width:100%;margin-bottom:28px}
+.rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;width:1336px;max-width:100%}
+.pachinko-game-card-info{
+  position:relative;flex:0 0 158px;width:158px;height:211px;
+  border-radius:10px;overflow:hidden;border:1px solid #2EE8A855;background:var(--panel);
+}
+.pachinko-game-card-info img{width:158px;height:211px;object-fit:cover;display:block}
+.pachinko-game-card-info.empty{background:linear-gradient(180deg,#0d1826,#0a1420)}
+.pachinko-game-card-info:hover{box-shadow:0 0 16px #2EE8A888}
+footer{
+  margin-left:var(--main-x);width:var(--main-w);max-width:calc(100% - var(--main-x));
+  background:#070e18;border-top:1px solid var(--line);
+  padding:22px 32px;color:var(--muted);font-size:12px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:18px;
+}
+footer .logo{height:26px}
+footer nav{display:flex;flex-wrap:wrap;gap:14px;flex:1}
+footer nav span{position:relative}
+.x,.mv{display:none;position:absolute;top:4px;z-index:3;border:0;border-radius:50%;width:22px;height:22px;cursor:pointer;font-weight:900;font-size:12px;padding:0;line-height:22px}
+.x{right:4px;background:#e44;color:#fff}
+.mv{background:#fff;color:#000}.mv.l{left:4px}.mv.r{left:28px}
+.edit .x,.edit .mv{display:block}
+.edit .sidebar .mv{display:none}
+.edit .ed{outline:1px dashed var(--mint)}
+#bar{position:fixed;right:16px;bottom:16px;display:flex;gap:8px;z-index:40}
+</style>
+</head>
+<body>
+<header class="desktop-header">
+  <img class="logo" src="img/logo.png" alt="TWOWIN">
+  <div class="sp"></div>
+  <div class="ib">👤</div>
+  <div class="ib">✈</div>
+  <button class="btn ghost">로그인</button>
+  <button class="btn m">회원가입</button>
+</header>
+<aside class="sidebar" id="side"></aside>
+<main class="main-desktop">
+  <div class="hero-banner">
+    <img class="slide" src="img/banner.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+    <div class="ph" style="display:none">배너 · img/banner.png</div>
+    <button class="arrow l" type="button">‹</button>
+    <button class="arrow r" type="button">›</button>
+  </div>
+  <div class="quick-nav-section" id="cats"></div>
+  <div id="rails"></div>
+</main>
+<footer>
+  <img class="logo" src="img/logo.png" alt="">
+  <nav id="fl"></nav>
+  <span>저작권 © TWOWIN BET 모든 권리 보유.</span>
+</footer>
+<div id="bar">
+  <button class="btn m" id="tg">편집모드</button>
+  <button class="btn" id="ex">설정 내보내기</button>
+  <button class="btn" id="rs">초기화</button>
+</div>
 <script src="config.js"></script>
 <script>
-const KEY='twowin-page-v1';let S=JSON.parse(localStorage.getItem(KEY)||'null')||JSON.parse(JSON.stringify(SITE));
-const save=()=>localStorage.setItem(KEY,JSON.stringify(S)),$=id=>document.getElementById(id),n2=i=>String(i+1).padStart(2,'0');
+const KEY='twowin-tting-v3';
+let S=JSON.parse(localStorage.getItem(KEY)||'null')||JSON.parse(JSON.stringify(SITE));
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=id=>document.getElementById(id);
+const n2=i=>String(i+1).padStart(2,'0');
 const C=i=>`<button class="x" data-a="del" data-i="${i}">×</button><button class="mv l" data-a="up" data-i="${i}">◀</button><button class="mv r" data-a="dn" data-i="${i}">▶</button>`;
-function bind(el,arr){el.querySelectorAll('[data-a]').forEach(b=>b.onclick=e=>{e.preventDefault();e.stopPropagation();const i=+b.dataset.i,a=b.dataset.a;
- if(a=='del'){if(!confirm('삭제할까요?'))return;arr.splice(i,1)}if(a=='up'&&i>0)[arr[i-1],arr[i]]=[arr[i],arr[i-1]];if(a=='dn'&&i<arr.length-1)[arr[i+1],arr[i]]=[arr[i],arr[i+1]];save();R()})}
+function bind(el,arr){
+  el.querySelectorAll('[data-a]').forEach(b=>b.onclick=e=>{
+    e.preventDefault();e.stopPropagation();
+    const i=+b.dataset.i,a=b.dataset.a;
+    if(a==='del'){if(!confirm('삭제할까요?'))return;arr.splice(i,1)}
+    if(a==='up'&&i>0)[arr[i-1],arr[i]]=[arr[i],arr[i-1]];
+    if(a==='dn'&&i<arr.length-1)[arr[i+1],arr[i]]=[arr[i],arr[i+1]];
+    save();R();
+  });
+}
 function R(){
- $('side').innerHTML=S.menus.map((m,i)=>`<a href="#" title="${m}"><img src="icons/side-${n2(i)}.png" onerror="this.replaceWith('${m[0]}')" style="width:100%;height:100%;object-fit:cover;border-radius:9px"></a>`).join('');
- $('cats').innerHTML=S.menus.map((c,i)=>`<div class="cat ed">${C(i)}<div class="ic"><img src="icons/cat-${n2(i)}.png" onerror="this.replaceWith('${c[0]}')"></div>${c}</div>`).join('');bind($('cats'),S.menus);
- $('fl').innerHTML=S.footerLinks.map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');bind($('fl'),S.footerLinks);
- $('rails').innerHTML=S.rails.map((r,ri)=>`<section class="ed"><h2><span class="dot"></span>${r.title}<span class="sp"></span><button class="pill on">인기</button><button class="pill">추천</button><button class="pill">모두</button>
- <button class="x" style="position:static" data-s="${ri}" title="섹션 삭제">×</button><button class="mv" style="position:static" data-su="${ri}">▲</button></h2>
- <div class="rail" data-ri="${ri}">${r.items.map((f,i)=>`<div class="tile ed">${C(i)}<img src="${r.dir}/${f}" title="${r.dir}/${f}" alt="${f}"></div>`).join('')}</div></section>`).join('');
- document.querySelectorAll('.rail').forEach(el=>bind(el,S.rails[el.dataset.ri].items));
- document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{if(confirm('섹션 전체 삭제?')){S.rails.splice(+b.dataset.s,1);save();R()}});
- document.querySelectorAll('[data-su]').forEach(b=>b.onclick=()=>{const i=+b.dataset.su;if(i>0){[S.rails[i-1],S.rails[i]]=[S.rails[i],S.rails[i-1]];save();R()}});
+  const sideMenus=S.sideMenus||S.menus||[];
+  $('side').innerHTML=sideMenus.map((m,i)=>`<a href="#" class="side-item ed" title="${m}">${C(i)}<div class="ic">${m[0]}</div><span>${m.length>5?m.slice(0,4)+'…':m}</span></a>`).join('');
+  bind($('side'),sideMenus);
+  $('cats').innerHTML=(S.menus||[]).map((c,i)=>`<div class="main-card ed">${C(i)}<div class="ic"><img src="icons/cat-${n2(i)}.png" onerror="this.replaceWith(document.createTextNode('${c[0]}'))"></div>${c}</div>`).join('');
+  bind($('cats'),S.menus);
+  $('fl').innerHTML=(S.footerLinks||[]).map((f,i)=>`<span class="ed">${f}<button class="x" style="top:-14px;right:-10px" data-a="del" data-i="${i}">×</button></span>`).join('');
+  bind($('fl'),S.footerLinks);
+  $('rails').innerHTML=(S.rails||[]).map((r,ri)=>`<section class="game-section ed">
+    <div class="section-head">
+      <h2><span class="dot"></span>${r.title}</h2>
+      <span class="sp"></span>
+      <button class="pill on">인기</button><button class="pill">추천</button><button class="pill">모두</button>
+      <button class="x" style="position:static" data-s="${ri}">×</button>
+      <button class="mv" style="position:static;border-radius:8px;width:auto;padding:0 8px" data-su="${ri}">▲</button>
+    </div>
+    <div class="rail" data-ri="${ri}">${(r.items&&r.items.length?r.items:Array(8).fill(null)).slice(0,8).map((f,i)=>f
+      ?`<div class="pachinko-game-card-info ed">${C(i)}<img src="${r.dir}/${f}" alt="${f}" title="${r.dir}/${f}" onerror="this.parentElement.classList.add('empty');this.remove()"></div>`
+      :`<div class="pachinko-game-card-info empty ed">${C(i)}</div>`
+    ).join('')}</div>
+  </section>`).join('');
+  document.querySelectorAll('.rail').forEach(el=>{
+    const ri=+el.dataset.ri;
+    if(!S.rails[ri].items) S.rails[ri].items=[];
+    bind(el,S.rails[ri].items);
+  });
+  document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{if(confirm('섹션 전체 삭제?')){S.rails.splice(+b.dataset.s,1);save();R()}});
+  document.querySelectorAll('[data-su]').forEach(b=>b.onclick=()=>{const i=+b.dataset.su;if(i>0){[S.rails[i-1],S.rails[i]]=[S.rails[i],S.rails[i-1]];save();R()}});
 }
 R();
 $('tg').onclick=()=>{document.body.classList.toggle('edit');$('tg').textContent=document.body.classList.contains('edit')?'편집 끝':'편집모드'};
-$('rs').onclick=()=>{if(confirm('config.js 원래대로 되돌릴까요?')){localStorage.removeItem(KEY);S=JSON.parse(JSON.stringify(SITE));R()}};
-$('ex').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['window.SITE = '+JSON.stringify(S,null,1)+';\n'],{type:'text/javascript'}));a.download='config.js';a.click()};
-</script></body></html>
+$('rs').onclick=()=>{if(confirm('config.js 원래대로?')){localStorage.removeItem(KEY);S=JSON.parse(JSON.stringify(SITE));R()}};
+$('ex').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['window.SITE = '+JSON.stringify(S,null,2)+';\n'],{type:'text/javascript'}));a.download='config.js';a.click()};
+</script>
+</body>
+</html>
